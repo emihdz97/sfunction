@@ -7,7 +7,6 @@ class Lexer():
 		self.lexer = LexerGenerator()
 
 	def _add_tokens(self):
-
 		# Utilidades
 		self.lexer.add('DISP', r'disp')
 		self.lexer.add('GET', r'get')
@@ -23,17 +22,15 @@ class Lexer():
 		self.lexer.add('SET_ARRAY', r'array')
 		self.lexer.add('SET_STRING', r'string')
 		self.lexer.add('SET_BOOL', r'bool')
-		self.lexer.add('SET_ARRAY', r'array')
 
 		# Funciones definidas
 		self.lexer.add('IF', r'if')
-		self.lexer.add('DOWHILE', r'do\-while')
+		self.lexer.add('DO', r'do')
 		self.lexer.add('WHILE', r'while')
 		self.lexer.add('FOR', r'for')
-		self.lexer.add('IN', r'in')
 		self.lexer.add('SET', r'set')
 
-
+		
 		# Operadores 
 		self.lexer.add('EQ', r'==')
 		self.lexer.add('GE', r'>=')
@@ -62,9 +59,8 @@ class Lexer():
 		self.lexer.add('STRING', r'\"[^"]*\"')
 		self.lexer.add('TRUE', r'#t')
 		self.lexer.add('FALSE', r'#f')
-		self.lexer.add('VAR_NAME', r'[a-zA-Z0-9]+')
+		self.lexer.add('VAR_NAME', r'[a-zA-Z0-9_-]+')
 		self.lexer.add('CHAR', r'\'[^ ]{1}\'')
-		self.lexer.add('VALUES_STRING', r'\{((-?\d+\.\d+|-?\d+|\"[^",]*\")[\ ]*,[\ ]*)*[\ ]*(-?\d+\.\d+|-?\d+|\"[^",]*\")\}')
 
 		# Ignorar espacios
 		self.lexer.ignore('\s+')
