@@ -1,0 +1,192 @@
+(disp "//_______ Asignación de variables _______\\")
+(integer intN 3)
+(integer intM 4)
+[(string str "hola")]
+(disp "valor de intN")
+(disp intN)
+(disp "valor de intM")
+(disp intM)
+[(disp "valor de str")]
+[(disp str)]
+
+
+
+(disp "  ")
+(disp "//_______ Operaciónes matemáticas sobre flotantes _______\\")
+(disp " ")
+(disp "suma 3.3 + intN")
+(disp 3.3 + intN)
+
+(disp "resta 2.0 - 3.1416")
+(disp 2.0 - 3.1416)
+
+(disp "division 2.5 / 1.2")
+(disp 2.5 / 1.2)
+
+(disp "multiplicacion 4.2 * 10.34")
+(disp 4.2 * 10.34)
+
+(disp "potencia 1.5 ^ m")
+(disp 1.5 ^ intM)
+
+(disp "modulo 12.2 % 3")
+(disp 12.2 % 3)
+(disp "  ")
+
+(disp "//_______ Operaciónes matemáticas sobre enteros _______\\")
+(disp " ")
+(disp "suma n + m")
+(disp intM + intN)
+
+(disp "resta n * m")
+(disp intN - intM)
+
+(disp "division n / m")
+(disp intN / intM)
+
+(disp "multiplicacion n * m")
+(disp intN * intM)
+
+(disp "potencia n ^ m")
+(disp intN ^ intM)
+
+(disp "modulo m % n")
+(disp intM % intN)
+(disp "  ")
+
+
+(disp "//_______ Conversión de tipos _______\\")
+(disp "  ")
+(disp "stingify intN")
+(disp (stringify intN))
+
+(disp "floatify intN")
+(disp (floatify intN))
+
+(disp "intfy 3.5")
+(disp (intfy 3.5))
+
+(disp "intfy 3.5")
+(disp (intfy 3.5))
+(disp "  ")
+
+
+(disp "//_______ Operaciones sobre strings _______\\")
+(disp "  ")
+
+(disp "concatenación de strings: hola+ +mundo")
+(disp "hola"+" "+"mundo")
+(disp "  ")
+
+(disp "multiplicación de strings: hola * 4")
+(disp "hola"*4)
+(disp "  ")
+
+(disp "substrings de strings: hola / 2")
+(disp "hola"/2)
+(disp "  ")
+
+(disp "character de strings: hola % 0")
+(disp "hola"%0)
+(disp "  ")
+
+(disp "concatenación de operadores: hola/2*5")
+(disp "hola"/2*5)
+(disp "  ")
+
+(disp "concatenación de operadores: hola%0*5")
+(disp "hola"%0*5)
+(disp "  ")
+
+(disp "concatenación de operadores: hola/2+mundo*5")
+(disp "hola"/2+"mundo"*5)
+(disp "  ")
+
+(disp "concatenación de operadores: hola%0+mundo/2")
+(disp "hola"%0+"mundo"/2)
+(disp "  ")
+
+(disp "concatenación de operadores: hola%0+mundo/m")
+(disp "hola"%0+"mundo"/intM)
+(disp "  ")
+
+
+(disp "//_______ Operadores comparativos _______\\")
+(disp " ")
+(disp "Igual: 8==8")
+(disp 8==8)
+(disp "Igual: 8==3")
+(disp 8==3)
+(disp "Igual: hola==mundo")
+(disp "hola"=="mundo")
+(disp "Igual: hola==hola")
+(disp "hola"=="hola")
+(disp " ")
+
+(disp "Mayor que: 8>8")
+(disp 8>8)
+(disp "Mayor que: 8>3")
+(disp 8>3)
+(disp "Mayor que: 1>8")
+(disp 1>8)
+(disp "Mayor que: hola>hola")
+(disp "hola">"hola")
+(disp " ")
+
+(disp "Mayor o Igual: 8>=8")
+(disp 8>=8)
+(disp "Mayor o Igual: 8>=3")
+(disp 8>=3)
+(disp "Mayor o Igual: hola>=mundo")
+(disp "hola">="mundo")
+(disp "Mayor o Igual: hola>=hola")
+(disp "hola">="hola")
+(disp " ")
+
+(disp "Menor que: 8<8")
+(disp 8<8)
+(disp "Menor que: 8<3")
+(disp 8<3)
+(disp "Menor que: 1<8")
+(disp 1<8)
+(disp "Menor que: hola<hola")
+(disp "hola"<"hola")
+(disp " ")
+
+(disp "Menor o Igual: 8<=8")
+(disp 8<=8)
+(disp "Menor o Igual: 8<=3")
+(disp 8<=3)
+(disp "Menor o Igual que: 1<=8")
+(disp 1<=8)
+(disp "Menor o Igual: hola<=mundo")
+(disp "hola"<="mundo")
+(disp "Menor o Igual: hola<=hola")
+(disp "hola"<="hola")
+(disp " ")
+
+(disp "//_______ Estructuras de control: if _______\\")
+(disp " ")
+(disp "if 7==9")
+(if 7==9
+	(
+		(disp "es igual")
+	)
+	(
+		(disp "no es igual")
+	)
+)
+(disp "9==9")
+(if 9==9
+	(
+		(disp "es igual")
+	)
+	(
+		(disp "no es igual")
+	)
+)
+
+(disp "_____ pruebas generales _____")
+(integer i 1)
+(disp i)
+(integer i 2)
