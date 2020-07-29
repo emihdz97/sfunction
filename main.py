@@ -2,8 +2,6 @@ from lexer import Lexer
 from parser import Parser
 import sys
 
-print(int("87"))
-
 
 f = open(sys.argv[1],"r")
 text_input = f.read()
