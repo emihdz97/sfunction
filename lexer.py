@@ -7,13 +7,6 @@ class Lexer():
 		self.lexer = LexerGenerator()
 
 	def _add_tokens(self):
-		# Funciones definidas
-		self.lexer.add('IF', r'if')
-		self.lexer.add('DO', r'do')
-		self.lexer.add('WHILE', r'while')
-		self.lexer.add('FOR', r'for')
-		self.lexer.add('SET', r'set')
-
 		# Utilidades
 		self.lexer.add('DISP', r'disp')
 		self.lexer.add('GET', r'get')
@@ -30,6 +23,14 @@ class Lexer():
 		self.lexer.add('SET_STRING', r'string')
 		self.lexer.add('SET_BOOL', r'bool')
 
+		# Funciones definidas
+		self.lexer.add('IF', r'if')
+		self.lexer.add('DO', r'do')
+		self.lexer.add('WHILE', r'while')
+		self.lexer.add('FOR', r'for')
+		self.lexer.add('SET', r'set')
+
+		
 		# Operadores 
 		self.lexer.add('EQ', r'==')
 		self.lexer.add('GE', r'>=')

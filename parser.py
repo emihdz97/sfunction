@@ -1,12 +1,12 @@
 from rply import ParserGenerator
-from ast import Variable, SetVariable, Bool, ToString, ToFloat, ToInt, Program, Lines, Equal, GreaterEqual, LessEqual, NotEqual, Greater, LessThan, String, Integer, Char, Float, Mul, Div, Sum, Sub, Display, Mod, Pow
+from ast import ForLoop, SetArray, WhileLoop, DoWhileLoop, LoopComparator, ChangeVariable, Variable, SetVariable, Bool, ToString, ToFloat, ToInt, Program, Lines, Equal, GreaterEqual, LessEqual, NotEqual, Greater, LessThan, String, Integer, Char, Float, Mul, Div, Sum, Sub, Display, Mod, Pow
 
 class Parser():
 	def __init__(self):
 		self.pg = ParserGenerator(
 			# List of accepted Tokens
 			#['IF','DO','WHILE','FOR','SET','DISP','GET','TO-STRING','TO-FLOAT','TO-INT','TO-BOOL','SUM','SUB','MUL','DIV','POW','EQL','MOD','OPEN_BRACKET','CLOSED_BRACKET','OPEN_COMMENT','CLOSED_COMMENT','INT']
-			['VAR_NAME','SET_INT','AND', 'TRUE', 'FALSE','TO-STRING','TO-FLOAT','TO-INT','TO-BOOL', 'IF','EQ', 'GE', 'LE','NE','GT','LT','CHAR','FLOAT','STRING','$end','OPEN_BRACKET', 'DISP', 'CLOSED_BRACKET', 'SUM', 'SUB','MUL','DIV','INT','POW','EQL','MOD'],
+			['FOR','IN','SET_FLOAT', 'VALUES_STRING', 'SET_ARRAY', 'DOWHILE', 'WHILE','VAR_NAME','SET_BOOL','SET_INT','SET_CHAR','SET_STRING','AND', 'TRUE', 'FALSE','TO-STRING','TO-FLOAT','TO-INT','TO-BOOL', 'IF','EQ', 'GE', 'LE','NE','GT','LT','CHAR','FLOAT','STRING','$end','OPEN_BRACKET', 'DISP', 'CLOSED_BRACKET', 'SUM', 'SUB','MUL','DIV','INT','POW','EQL','MOD'],
 			precedence =[
 				('left', ['SUM','SUB']),
 				('left', ['DIV','MUL']),
@@ -33,11 +33,13 @@ class Parser():
 		@self.pg.production('line : OPEN_BRACKET DISP bool CLOSED_BRACKET')
 		@self.pg.production('line : OPEN_BRACKET DISP comparison CLOSED_BRACKET')
 		@self.pg.production('line : OPEN_BRACKET DISP utility CLOSED_BRACKET')
-		@self.pg.production('line : OPEN_BRACKET SET_INT VAR_NAME INT CLOSED_BRACKET')
 		@self.pg.production('line : OPEN_BRACKET IF comparison OPEN_BRACKET lines CLOSED_BRACKET OPEN_BRACKET lines CLOSED_BRACKET CLOSED_BRACKET')
 		@self.pg.production('line : OPEN_BRACKET IF comparison OPEN_BRACKET lines CLOSED_BRACKET CLOSED_BRACKET')
 		@self.pg.production('line : OPEN_BRACKET IF bool OPEN_BRACKET lines CLOSED_BRACKET OPEN_BRACKET lines CLOSED_BRACKET CLOSED_BRACKET')
 		@self.pg.production('line : OPEN_BRACKET IF bool OPEN_BRACKET lines CLOSED_BRACKET CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET WHILE loopcomparison OPEN_BRACKET lines CLOSED_BRACKET CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET DOWHILE loopcomparison OPEN_BRACKET lines CLOSED_BRACKET CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET FOR OPEN_BRACKET VAR_NAME IN VAR_NAME CLOSED_BRACKET OPEN_BRACKET lines CLOSED_BRACKET CLOSED_BRACKET')
 		def line(p):
 			function = p[1]
 			if function.gettokentype() == 'DISP':
@@ -50,9 +52,59 @@ class Parser():
 						return p[2] #Este return p[2] debería ser rturn none pero no funciona ¿lo podemos dejar así?
 					elif p[6].gettokentype() == 'OPEN_BRACKET':
 						return p[7]
-			elif function.gettokentype() == 'SET_INT':
+			elif function.gettokentype() == 'WHILE':
+				return WhileLoop(p[2],p[4])
+			elif function.gettokentype() == 'DOWHILE':
+				return DoWhileLoop(p[2],p[4])
+			elif function.gettokentype() == 'FOR':
+				#iterator array lines
+				print("hello")
+				if p[4].gettokentype() == 'IN':
+					return ForLoop(p[3],p[5],p[8])
+
+
+		@self.pg.production('line : OPEN_BRACKET SET_INT VAR_NAME INT CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET SET_FLOAT VAR_NAME FLOAT CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET SET_CHAR VAR_NAME CHAR CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET SET_STRING VAR_NAME STRING CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET SET_BOOL VAR_NAME TRUE CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET SET_BOOL VAR_NAME FALSE CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET SET_ARRAY SET_INT VAR_NAME VALUES_STRING CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET SET_ARRAY SET_FLOAT VAR_NAME VALUES_STRING CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET SET_ARRAY SET_STRING VAR_NAME VALUES_STRING CLOSED_BRACKET')
+		def line(p):
+			function = p[1]
+			if function.gettokentype() == 'SET_INT':
 				#NAME TYPE VALUE
 				return SetVariable(p[2].value,p[1].value,Integer(p[3].value))
+			elif function.gettokentype() == 'SET_FLOAT':
+				#NAME TYPE VALUE
+				return SetVariable(p[2].value,p[1].value,Float(p[3].value))
+			elif function.gettokentype() == 'SET_CHAR':
+				#NAME TYPE VALUE
+				return SetVariable(p[2].value,p[1].value,Char(p[3].value))
+			elif function.gettokentype() == 'SET_STRING':
+				#NAME TYPE VALUE
+				return SetVariable(p[2].value,p[1].value,String(p[3].value))
+			elif function.gettokentype() == 'SET_BOOL':
+				#NAME TYPE VALUE
+				return SetVariable(p[2].value,p[1].value,Bool(p[3].value))
+			elif function.gettokentype() == 'SET_ARRAY':
+				#NAME TYPE VALUE
+				type = p[2].gettokentype()
+				if type == 'SET_INT':
+					return SetArray(p[4], 0, p[3].value)
+				elif type == 'SET_FLOAT':
+					return SetArray(p[4], 0.0, p[3].value)
+				elif type == 'SET_STRING':
+					return SetArray(p[4], "a", p[3].value)
+
+
+		@self.pg.production('line : OPEN_BRACKET VAR_NAME EQL expression CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET VAR_NAME EQL bool CLOSED_BRACKET')
+		def line(p):
+			#print(p[1].value, p[3])
+			return ChangeVariable(p[1].value,p[3])
 
 
 		@self.pg.production('utility : OPEN_BRACKET TO-STRING expression CLOSED_BRACKET')
@@ -100,6 +152,39 @@ class Parser():
 				return Greater(left, right)
 			elif comparator.gettokentype() == 'LT':
 				return LessThan(left, right)
+
+
+
+		@self.pg.production('loopcomparison : expression EQ expression')
+		@self.pg.production('loopcomparison : expression GE expression')
+		@self.pg.production('loopcomparison : expression LE expression')
+		@self.pg.production('loopcomparison : expression NE expression')
+		@self.pg.production('loopcomparison : expression GT expression')
+		@self.pg.production('loopcomparison : expression LT expression')
+		@self.pg.production('loopcomparison : bool EQ bool')
+		@self.pg.production('loopcomparison : bool GE bool')
+		@self.pg.production('loopcomparison : bool LE bool')
+		@self.pg.production('loopcomparison : bool NE bool')
+		@self.pg.production('loopcomparison : bool GT bool')
+		@self.pg.production('loopcomparison : bool LT bool')
+		def comparison(p):
+			left = p[0]
+			right = p[2]
+			comparator = p[1]
+			return LoopComparator(left, comparator, right)
+			#if comparator.gettokentype() == 'EQ':
+			#	return Equal(left, right)
+			#elif comparator.gettokentype() == 'GE':
+			#	return GreaterEqual(left, right)
+			#elif comparator.gettokentype() == 'LE':
+			#	return LessEqual(left, right)
+			#elif comparator.gettokentype() == 'NE':
+			#	return NotEqual(left, right)
+			#elif comparator.gettokentype() == 'GT':
+			#	return Greater(left, right)
+			#elif comparator.gettokentype() == 'LT':
+			#	return LessThan(left, right)
+
 
 
 		@self.pg.production('expression : expression SUM expression')
