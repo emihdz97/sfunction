@@ -19,8 +19,8 @@ class SetVariable():
 			return
 		else:
 			variables[self.name] = {"type": type(self.value.eval()), "value":self.value.eval()}
-			#for x, y in variables.items():
-			#	print(x,y)
+			for x, y in variables.items():
+				print(x,y)
 
 class ChangeVariable():
 	def __init__(self, name, value):
@@ -469,14 +469,27 @@ class ForLoop():
 
 	def eval(self):
 		lines = self.lines
-		print("iterator ",self.iteratorName.value, " array ",self.arrayName.value)
-		lines.eval()
-		for key,variable in variables.items():
-			print(key,variable)
+#		print("iterator ",self.iteratorName.value, " array ",self.arrayName.value)
+#		lines.eval()
+#		for key,variable in variables.items():
+#			print(key,variable)
 		if self.arrayName.value in variables:
-			print("found array")
 			if variables[self.arrayName.value]["type"] is list:
-				print("es iterable")
-		else:
-			print("fu")
+#				print("es iterable")
+				name = self.iteratorName.value
+				value = variables[self.arrayName.value]["value"][0]
+				variables[name] = {"type": type(value), "value":value}
+#		for x, y in variables.items():
+#			print(x,y)
+
+				for a in variables[self.arrayName.value]["value"]:
+					variables[name] = {"type": a, "value":a}
+#					print(variables[name])
+					lines.eval()
+
+				del variables[name]
+#		for x, y in variables.items():
+#			print(x,y)
+
+
 		return
