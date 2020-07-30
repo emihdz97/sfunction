@@ -1,0 +1,49 @@
+[Define arreglo, iterador para recorrer en while, longitud]
+        (array integer n {5,4,1,2,5,-2,0,9})
+        (integer iterator 1)
+        (integer length 8)
+        [establece la primera posición como el valor mínimo]
+        (integer minimum (0 #in n))
+        (integer position 0)
+        [Temporal para ciclo]
+        (integer value 0)
+        (while iterator<length
+                (
+                        (value = (iterator #in n))
+                        [Si el elemento leído es menor que el mínimo actualiza posición y valor]
+                        (if value < minimum
+                                (
+                                        (minimum = value)
+                                        (position = iterator)
+                                )
+                        )
+                        (iterator = iterator + 1)
+                )
+        )
+        [Muestra arreglo original]
+        (disp n)
+        [Asigna iterador a 0]
+        (iterator = 0)
+        [Variables temporales para recorrer los elementos]
+        (integer after minimum)
+        (integer before 0)
+        (while iterator<length
+                (
+                        [Si no hemos alcanzado la posición del valor mínimo, recorre los valores]
+                        [En la primera iteración after es el valor mínimo]
+                        (if iterator != position
+                                (
+                                        (before = (iterator #in n))
+                                        ((iterator #in n) = after)
+                                        (after = before)
+                                )
+                                [Si alcanza el valor mínimo entonces recorre el último valor y rompe el while]
+                                (
+                                        ((iterator #in n) = after)
+                                        (iterator = length)
+                                )
+                        )
+                        (iterator = iterator + 1)
+                )
+        )
+        (disp n)
