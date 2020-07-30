@@ -127,6 +127,59 @@ class Variable():
 			print("Variable: la variable ", self.name," no existe")
 			exit()
 
+class ArrayPosition():
+	def __init__(self, position, name):
+		self.name = name
+		self.position = position
+
+	def eval(self):
+		if self.name in variables:
+			array = variables.get(self.name).get("value")
+			position = self.position.eval()
+			if type(array) is list:
+				if position < len(array):
+					return array[position]
+				else:
+					print("ArrayPosition: la posición ", position," supera la longitud de la lista")
+					exit()
+			else:
+				print("ArrayPosition: la variable ", self.name," no es una lista")
+				exit()
+		else:
+			print("ArrayPosition: la variable ", self.name," no ha sido declarada")
+			exit()
+
+
+class SetArrayPosition():
+	def __init__(self, position, name, value):
+		self.name = name
+		self.position = position
+		self.value = value
+
+	def eval(self):
+		if self.name in variables:
+			array = variables.get(self.name).get("value")
+			position = self.position.eval()
+			if type(array) is list:
+				if position < len(array):
+					#print(variables.get(self.name))
+					#print(array[position], self.value.eval())
+					if type(array[position]) == type(self.value.eval()):
+						variables.get(self.name).get("value")[position] = self.value.eval()
+						return
+					else:
+						print("SetArrayPosition: el dato ", type(self.value.eval())," no es compatible con la lista")
+						exit()
+				else:
+					print("SetArrayPosition: la posición ", position," supera la longitud de la lista")
+					exit()
+			else:
+				print("SetArrayPosition: la variable ", self.name," no es una lista")
+				exit()
+		else:
+			print("SetArrayPosition: la variable ", self.name," no ha sido declarada")
+			exit()
+
 
 
 #Last Added

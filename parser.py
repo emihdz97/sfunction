@@ -1,5 +1,5 @@
 from rply import ParserGenerator
-from ast import If, IfElse, IntInput, StringInput, CharInput, FloatInput, ForLoop, SetArray, WhileLoop, DoWhileLoop, LoopComparator, ChangeVariable, Variable, SetVariable, Bool, ToString, ToFloat, ToInt, Program, Lines, Equal, GreaterEqual, LessEqual, NotEqual, Greater, LessThan, String, Integer, Char, Float, Mul, Div, Sum, Sub, Display, Mod, Pow
+from ast import SetArrayPosition, ArrayPosition, If, IfElse, IntInput, StringInput, CharInput, FloatInput, ForLoop, SetArray, WhileLoop, DoWhileLoop, LoopComparator, ChangeVariable, Variable, SetVariable, Bool, ToString, ToFloat, ToInt, Program, Lines, Equal, GreaterEqual, LessEqual, NotEqual, Greater, LessThan, String, Integer, Char, Float, Mul, Div, Sum, Sub, Display, Mod, Pow
 
 class Parser():
 	def __init__(self):
@@ -237,6 +237,25 @@ class Parser():
 		@self.pg.production('expression : VAR_NAME')
 		def char(p):
 			return Variable(p[0].value)
+
+		@self.pg.production('expression : OPEN_BRACKET INT IN VAR_NAME CLOSED_BRACKET')
+		@self.pg.production('expression : OPEN_BRACKET VAR_NAME IN VAR_NAME CLOSED_BRACKET')
+		def expression(p):
+			if p[1].gettokentype() == 'INT':
+				return ArrayPosition(Integer(p[1].value), p[3].value)
+			else:
+				return ArrayPosition(Variable(p[1].value), p[3].value)
+
+
+		@self.pg.production('line : OPEN_BRACKET OPEN_BRACKET INT IN VAR_NAME CLOSED_BRACKET EQL expression CLOSED_BRACKET')
+		@self.pg.production('line : OPEN_BRACKET OPEN_BRACKET VAR_NAME IN VAR_NAME CLOSED_BRACKET EQL expression CLOSED_BRACKET')
+		def expression(p):
+			if p[2].gettokentype() == 'INT':
+				return SetArrayPosition(Integer(p[2].value), p[4].value, p[7])
+			else:
+				return SetArrayPosition(Variable(p[2].value), p[4].value, p[7])
+
+
 
 		@self.pg.production('bool : TRUE')
 		@self.pg.production('bool : FALSE')
