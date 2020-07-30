@@ -1,0 +1,29 @@
+(array integer arr {1,2,3,4,5,6,7,8,9,10,11,12,13,14})
+(integer toLook 10)
+(integer found 0)
+(for (i #in arr)
+	(
+		(disp i)
+		(if i == toLook
+			(	
+				(disp "here")
+				(found = 1)
+			)
+			(
+				(found = found)
+			)
+
+		)
+
+	)
+)
+
+(disp found == 1)
+(if found == 1
+	(
+		(disp "FOUND!!")
+	)
+	(
+		(disp "not found :(")
+	)
+)

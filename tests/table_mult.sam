@@ -1,0 +1,11 @@
+(integer num 12)
+(integer i 1)
+
+(do-while i<num
+	(
+		(disp i*num)
+		(i = i+1)
+	)
+	
+	
+)

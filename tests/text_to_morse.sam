@@ -1,0 +1,175 @@
+(integer n 10)
+(string text "hola mundo")
+(integer i 0)
+
+(do-while i<n
+	(
+		(disp text%i)
+		(if text%i == "a"
+			(	
+				(disp ". -")
+			)
+
+		)
+		(if text%i == "b"
+			(	
+				(disp "- . . .")
+			)
+
+		)
+		(if text%i == "c"
+			(	
+				(disp "- . - . ")
+			)
+
+		)
+		(if text%i == "d"
+			(	
+				(disp "- . .")
+			)
+
+		)
+		(if text%i == "e"
+			(	
+				(disp ".")
+			)
+
+		)
+		(if text%i == "f"
+			(	
+				(disp ". . - .")
+			)
+
+		)
+		(if text%i == "g"
+			(	
+				(disp "- - .")
+			)
+
+		)
+		(if text%i == "h"
+			(	
+				(disp ". . . .")
+			)
+
+		)
+		(if text%i == "i"
+			(	
+				(disp ". .")
+			)
+
+		)
+		(if text%i == "j"
+			(	
+				(disp ". - - -")
+			)
+
+		)
+		(if text%i == "k"
+			(	
+				(disp "- . -")
+			)
+
+		)
+		(if text%i == "l"
+			(	
+				(disp ". - . .")
+			)
+
+		)
+		(if text%i == "m"
+			(	
+				(disp "- -")
+			)
+
+		)
+		(if text%i == "n"
+			(	
+				(disp "- .")
+			)
+
+		)					
+		(if text%i == "o"
+			(	
+				(disp "- - -")
+			)
+
+		)
+		(if text%i == "p"
+			(	
+				(disp ". - - .")
+			)
+
+		)	
+		(if text%i == "q"
+			(	
+				(disp "- - . -")
+			)
+
+		)
+		(if text%i == "r"
+			(	
+				(disp ". - .")
+			)
+
+		)	
+		(if text%i == "s"
+			(	
+				(disp ". . .")
+			)
+
+		)				
+		(if text%i == "t"
+			(	
+				(disp "-")
+			)
+
+		)
+		(if text%i == "u"
+			(	
+				(disp ". . -")
+			)
+
+		)
+		(if text%i == "v"
+			(	
+				(disp ". . . -")
+			)
+
+		)
+		(if text%i == "w"
+			(	
+				(disp ". - -")
+			)
+
+		)	
+		(if text%i == "x"
+			(	
+				(disp "- . . -")
+			)
+
+		)
+		(if text%i == "y"
+			(	
+				(disp "- . - -")
+			)
+
+		)
+		(if text%i == "z"
+			(	
+				(disp "- - . .")
+			)
+
+		)									
+		(if text%i == " "
+			(	
+				(disp " ")
+			)
+
+		)
+	
+		(i = i+1)
+	)
+	
+)
+

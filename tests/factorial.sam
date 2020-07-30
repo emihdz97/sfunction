@@ -1,0 +1,15 @@
+(integer n 13)
+(integer result 1)
+(integer i 1)
+
+(do-while i<=n
+	(
+		(result = result*i )
+		(i = i+1)
+	)
+	
+)
+
+(disp "factorial of:")
+(disp n)
+(disp result)

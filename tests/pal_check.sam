@@ -1,0 +1,29 @@
+(integer n 8)
+(string pal "paliilap")
+(integer i 0)
+(integer j 7)
+(bool ispal #t)
+
+(do-while i<n
+	(
+
+		(if pal%i != pal%j
+			(	
+				(ispal = #f)
+			)
+			(
+				(ispal = ispal)
+			)
+
+		)
+
+
+		(i = i+1)
+		(j = j-1)
+	)
+	
+)
+(disp pal)
+(disp "palindrome: ")
+(disp ispal)
+
